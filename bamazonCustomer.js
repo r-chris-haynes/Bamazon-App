@@ -38,6 +38,37 @@ function showItems() {
     setTimeout(purchase, 1000); 
 };
 
-
+function purchase() {
+    
+    inquirer.prompt([
+            {
+                name: "buy",
+                type: "input",
+                message: "Please enter the id of the item you would like to purchase.",
+                validate: function(value) {
+                    if (isNaN(value) == false || prompt(value) > 10) {
+                        return true;
+                    } else {
+                        // return false;
+                        console.log(" Invalid entry. Please try again.")
+                    }
+                }
+            },
+            {
+                name: "amount",
+                type: "input",
+                message: "How many would you like to purchase?",
+                validate: function(value) {
+                    if (isNaN(value) == false) {
+                        return true;
+                    } else {
+                        // return false;
+                        console.log(" Invalid entry. Please try again.")
+                    }
+                }
+            }
+        ])
+        
+}
 
   
