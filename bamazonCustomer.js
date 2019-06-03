@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    console.log("connected as id " + connection.threadId + "\n");
+    // console.log("connected as id " + connection.threadId + "\n");
     showItems();
   });
 
@@ -39,25 +39,11 @@ function showItems() {
 };
 
 function purchase() {
-    
     inquirer.prompt([
             {
                 name: "buy",
                 type: "input",
                 message: "Please enter the id of the item you would like to purchase.",
-                validate: function(value) {
-                    if (isNaN(value) == false || prompt(value) > 10) {
-                        return true;
-                    } else {
-                        // return false;
-                        console.log(" Invalid entry. Please try again.")
-                    }
-                }
-            },
-            {
-                name: "amount",
-                type: "input",
-                message: "How many would you like to purchase?",
                 validate: function(value) {
                     if (isNaN(value) == false) {
                         return true;
@@ -66,8 +52,29 @@ function purchase() {
                         console.log(" Invalid entry. Please try again.")
                     }
                 }
-            }
+            },
+            // {
+            //     name: "amount",
+            //     type: "input",
+            //     message: "How many would you like to purchase?",
+            //     validate: function(value) {
+            //         if (isNaN(value) == false) {
+            //             return true;
+            //         } else {
+            //             // return false;
+            //             console.log(" Invalid entry. Please try again.")
+            //         }
+            //     }
+            // }
         ])
+        .then(function(answer){
+            console.log(answer);
+            if (answer.buy > 10) {
+                console.log("That item doesn't exist. Please try again.");
+                purchase();
+            }
+            
+        })
         
 }
 
