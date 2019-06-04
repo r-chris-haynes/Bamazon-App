@@ -43,10 +43,13 @@ function purchase() {
         if (err) throw err;
 
         var ids = [];
+        var stockQuantity = [];
         for(let i = 0; i < res.length; i++) {
             ids.push(res[i].item_id);
+            stockQuantity.push(res[i].stock_quantity);
         }
         // console.log(ids);
+        console.log(stockQuantity);
     inquirer.prompt([
         {
             name: "buy",
@@ -87,9 +90,5 @@ function purchase() {
         //     }
 
         // });
-}
-
-
-
-
-    )}
+    }
+)}
