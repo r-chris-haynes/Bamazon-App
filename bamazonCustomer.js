@@ -2,7 +2,6 @@ var inquirer = require("inquirer");
 var mysql = require("mysql");
 var Table = require('cli-table');
 
-
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -44,12 +43,13 @@ function purchase() {
 
         var ids = [];
         var stockQuantity = [];
-        for(let i = 0; i < res.length; i++) {
+        
+        for(var i = 0; i < res.length; i++) {
             ids.push(res[i].item_id);
             stockQuantity.push(res[i].stock_quantity);
         }
         // console.log(ids);
-        console.log(stockQuantity);
+        // console.log(stockQuantity);
     inquirer.prompt([
         {
             name: "buy",
@@ -80,15 +80,11 @@ function purchase() {
             }
         }
     ])
-        // .then(function (answer) {
-        //     // console.log(answer);
-        //     if (answer.buy > ids.length) {
-        //         console.log("That item doesn't exist. Please try again.");
-        //         purchase();
-        //     } else {
-                
-        //     }
-
-        // });
+        .then(function (answers) {
+            var chosenId = answers.buy.toString();
+            var numToBuy = answers.amount.toString();
+            var inst = `SELECT * FROM products WHERE item_id =` +  chosenId + `'`;
+           
+        });
     }
 )}
