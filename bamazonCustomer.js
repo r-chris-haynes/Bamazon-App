@@ -86,8 +86,11 @@ function purchase() {
             var inst = `SELECT * FROM products WHERE item_id = '` +  chosenId + `'`;
            connection.query(inst, function(err, res){
                if (err) throw err;
-              console.log(res[0].stock_quantity);
-            
+            //   console.log(res[0].stock_quantity);
+                if (numToBuy > res[0].stock_quantity) {
+                    console.log("Sorry, we don't have that many in stock. Please try again.");
+                    purchase();
+                }
            })
         });
     }
