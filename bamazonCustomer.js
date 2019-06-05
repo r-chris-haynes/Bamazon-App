@@ -83,8 +83,11 @@ function purchase() {
         .then(function (answers) {
             var chosenId = answers.buy.toString();
             var numToBuy = answers.amount.toString();
-            var inst = `SELECT * FROM products WHERE item_id =` +  chosenId + `'`;
-           
+            var inst = `SELECT * FROM products WHERE item_id = '` +  chosenId + `'`;
+           connection.query(inst, function(err, res){
+               if (err) throw err;
+            //    console.log(res)
+           })
         });
     }
 )}
