@@ -42,11 +42,11 @@ function purchase() {
         if (err) throw err;
 
         var ids = [];
-        var stockQuantity = [];
+        // var stockQuantity = [];
         
         for(var i = 0; i < res.length; i++) {
             ids.push(res[i].item_id);
-            stockQuantity.push(res[i].stock_quantity);
+            // stockQuantity.push(res[i].stock_quantity);
         }
         // console.log(ids);
         // console.log(stockQuantity);
@@ -86,7 +86,8 @@ function purchase() {
             var inst = `SELECT * FROM products WHERE item_id = '` +  chosenId + `'`;
            connection.query(inst, function(err, res){
                if (err) throw err;
-            //    console.log(res)
+              console.log(res[0].stock_quantity);
+            
            })
         });
     }
