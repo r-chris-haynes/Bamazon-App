@@ -92,7 +92,22 @@ function purchase() {
                     purchase();
                 } else {
                     var newQuantity = res[0].stock_quantity - numToBuy;
-                    console.log(newQuantity);
+                    connection.query(
+                        "UPDATE products SET ? WHERE ?",
+                        [
+                          {
+                            stock_quantity: newQuantity
+                          },
+                          {
+                            item_id: chosenId
+                          }
+                        ],
+                        function(err) {
+                          if (err) throw err;
+                          console.log("Thanks for your order! Your total is $" + numToBuy * res[0].price);
+                          purchase();
+                        }
+                      );
                 }
            })
         });
