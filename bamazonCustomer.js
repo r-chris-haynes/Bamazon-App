@@ -90,6 +90,9 @@ function purchase() {
                 if (numToBuy > res[0].stock_quantity) {
                     console.log("Sorry, we don't have that many in stock. Please try again.");
                     purchase();
+                } else {
+                    var newQuantity = res[0].stock_quantity - numToBuy;
+                    console.log(newQuantity);
                 }
            })
         });
