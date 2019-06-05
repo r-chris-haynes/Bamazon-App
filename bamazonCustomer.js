@@ -37,19 +37,17 @@ function showItems() {
     setTimeout(purchase, 1000);
 };
 
+//  ================================================================
+
 function purchase() {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
 
         var ids = [];
-        // var stockQuantity = [];
         
         for(var i = 0; i < res.length; i++) {
             ids.push(res[i].item_id);
-            // stockQuantity.push(res[i].stock_quantity);
-        }
-        // console.log(ids);
-        // console.log(stockQuantity);
+           }
     inquirer.prompt([
         {
             name: "buy",
@@ -60,9 +58,7 @@ function purchase() {
                 if (isNaN(value) == false && value <= ids.length) {
                     return true;
                 } else {
-                    // return false;
                     console.log(" Invalid entry. Please try again.")
-                    // console.log(ids);
                 }
             }
         },
@@ -74,7 +70,6 @@ function purchase() {
                 if (isNaN(value) == false) {
                     return true;
                 } else {
-                    // return false;
                     console.log(" Invalid entry. Please try again.")
                 }
             }
@@ -84,9 +79,9 @@ function purchase() {
             var chosenId = answers.buy.toString();
             var numToBuy = answers.amount.toString();
             var inst = `SELECT * FROM products WHERE item_id = '` +  chosenId + `'`;
-           connection.query(inst, function(err, res){
-               if (err) throw err;
-            //   console.log(res[0].stock_quantity);
+            connection.query(inst, function(err, res){
+                if (err) throw err;
+         
                 if (numToBuy > res[0].stock_quantity) {
                     console.log("Sorry, we don't have that many in stock. Please try again.");
                     purchase();
@@ -105,11 +100,12 @@ function purchase() {
                         function(err) {
                           if (err) throw err;
                           console.log("Thanks for your order! Your total is $" + numToBuy * res[0].price);
-                          purchase();
+                          showItems();
+                         
                         }
-                      );
-                }
+                    );
+                };
            })
         });
     }
-)}
+)};
