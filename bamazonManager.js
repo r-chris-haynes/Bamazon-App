@@ -29,12 +29,16 @@ function promptQuestion(){
         }
     ])
         .then(function(answers){
-            if (answers.choices[0]) {
+            if (answers.choices === "View products for sale") {
                 showItems();
+                setTimeout(promptQuestion, 1000);
             }
-            if (answers.choices[1]) {
+            else if (answers.choices === "View low inventory") {
                 showLowInventory();
-            }   
+                setTimeout(promptQuestion, 1000);
+            } 
+              
+            
         })
 };
 
