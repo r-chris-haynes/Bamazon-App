@@ -94,7 +94,7 @@ function addInventory() {
             {
                 name: "id",
                 type: "input",
-                message: "Please select the item id.",
+                message: "Please select an item id.",
                 validate: function(value) {
                     if (isNaN(value) == false) {
                         return true;
@@ -117,50 +117,35 @@ function addInventory() {
             }
         ])
         .then(function(answers){
-            var chosenId = answers.id.toString();
-            var amountToAdd = parseInt(answers.amount);
+            var chosenId = answers.id;
+            var amountToAdd = answers.amount;
             
             connection.query(`SELECT * FROM products WHERE item_id = '` +  chosenId + `'`, function(err,res){
                 if(err) throw err;
-                var stockQuantity = parseInt(res[0].stock_quantity);
-                var newQuantity = amountToAdd + stockQuantity;
-                console.log(newQuantity);
+                
+                var stockQuantity = res[0].stock_quantity;
+                var newQuantity = parseInt(amountToAdd) + parseInt(stockQuantity);
+                
+                connection.query(
+                    "UPDATE products SET ? WHERE ?",
+                    [
+                      {
+                        stock_quantity: newQuantity
+                      },
+                      {
+                        item_id: chosenId
+                      }
+                    ],
+                    function(err) {
+                      if (err) throw err;
+                      console.log("Your inventory has been updated. The new amount is: " + newQuantity);
+                      showItems();
+                     setTimeout(promptQuestion, 1000);
+                    }
+                );
             }) 
         })
        
     }
 }
-
-// .then(function(answer){
-//     var managerChoice = answer.manager.toString();
-//     var inst = `SELECT * FROM products WHERE item_id = '` +  managerChoice + `'`;
-//     connection.query(inst, function(err, res){
-//         if (err) throw err;
- 
-//         if (managerChoice > res[0].item_id) {
-//             console.log("Invalid id number. Please try again.");
-            
-//         } else {
-//             var newQuantity = res[0].stock_quantity + managerChoice;
-//             connection.query(
-//                 "UPDATE products SET ? WHERE ?",
-//                 [
-//                   {
-//                     stock_quantity: newQuantity
-//                   },
-//                   {
-//                     item_id: managerChoice
-//                   }
-//                 ],
-//                 function(err) {
-//                   if (err) throw err;
-//                   console.log("Your inventory has been updated. The new amount is: " + newQuantity);
-//                   showItems();
-                 
-//                 }
-//             );
-//         };
-//    })
-    
-// })
 
