@@ -94,7 +94,7 @@ function addInventory() {
             {
                 name: "id",
                 type: "input",
-                message: "Please select the item where you want to add inventory.",
+                message: "Please select the item id.",
                 validate: function(value) {
                     if (isNaN(value) == false) {
                         return true;
@@ -118,10 +118,13 @@ function addInventory() {
         ])
         .then(function(answers){
             var chosenId = answers.id.toString();
-            var amount = answers.amount.toString();
+            var amountToAdd = parseInt(answers.amount);
             
             connection.query(`SELECT * FROM products WHERE item_id = '` +  chosenId + `'`, function(err,res){
-                console.log(res);
+                if(err) throw err;
+                var stockQuantity = parseInt(res[0].stock_quantity);
+                var newQuantity = amountToAdd + stockQuantity;
+                console.log(newQuantity);
             }) 
         })
        
