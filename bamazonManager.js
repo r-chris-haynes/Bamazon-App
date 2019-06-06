@@ -39,7 +39,8 @@ function promptQuestion(){
             } 
             else if (answers.choices === "Add inventory") {
                 setTimeout(addInventory, 1000);
-            }  
+            }
+              
             
         })
 };
