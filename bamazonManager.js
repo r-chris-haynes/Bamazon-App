@@ -117,10 +117,12 @@ function addInventory() {
             }
         ])
         .then(function(answers){
-            var id = answers.id.toString();
+            var chosenId = answers.id.toString();
             var amount = answers.amount.toString();
             
-            
+            connection.query(`SELECT * FROM products WHERE item_id = '` +  chosenId + `'`, function(err,res){
+                console.log(res);
+            }) 
         })
        
     }
