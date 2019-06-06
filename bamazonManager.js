@@ -38,7 +38,6 @@ function promptQuestion(){
                 setTimeout(promptQuestion, 1000);
             } 
             else if (answers.choices === "Add to inventory") {
-                
                 setTimeout(addInventory, 1000);
             }  
             
@@ -89,8 +88,28 @@ function showLowInventory() {
 
 function addInventory() {
     showItems();
-    // function managerQuestions() {
-
-    // }
+    setTimeout(managerQuestions, 1000);
+    function managerQuestions() {
+        inquirer.prompt([
+            {
+                name: "manager",
+                type: "input",
+                message: "Please select the item id where you'd like to add inventory.",
+                validate: function(value) {
+                    if (isNaN(value) == false) {
+                        return true;
+                    } else {
+                        console.log(" Invalid entry. Please try again.")
+                    }
+                }
+            }
+        ])
+        .then(function(answer){
+            var managerChoice = answer.manager.toString();
+            var inst = `SELECT * FROM products WHERE item_id = '` +  managerChoice + `'`;
+            console.log(inst);
+           
+        })
+    }
 }
 
