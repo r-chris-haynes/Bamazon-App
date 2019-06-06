@@ -37,7 +37,10 @@ function promptQuestion(){
                 showLowInventory();
                 setTimeout(promptQuestion, 1000);
             } 
-              
+            else if (answers.choices === "Add to inventory") {
+                
+                setTimeout(addInventory, 1000);
+            }  
             
         })
 };
@@ -81,3 +84,13 @@ function showLowInventory() {
         console.log(lowInvTable.toString());
     });
 };
+
+// =======================================================================================
+
+function addInventory() {
+    showItems();
+    // function managerQuestions() {
+
+    // }
+}
+

@@ -15,7 +15,7 @@ connection.connect(function (err) {
     showItems();
 });
 
-//   ===========================================================
+// =======================================================================================
 
 function showItems() {
     connection.query("SELECT * FROM products", function (err, res) {
@@ -37,7 +37,7 @@ function showItems() {
     setTimeout(purchase, 1000);
 };
 
-//  ================================================================
+// =======================================================================================
 
 function purchase() {
     connection.query("SELECT * FROM products", function (err, res) {
