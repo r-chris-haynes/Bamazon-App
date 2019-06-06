@@ -25,7 +25,7 @@ function promptQuestion(){
             name: "choices",
             type: "list",
             message: "Please select an option.",
-            choices: ["View products for sale", "View low inventory", "Add to inventory", "Add a new product"]
+            choices: ["View products for sale", "View low inventory", "Add inventory", "Add a new product"]
         }
     ])
         .then(function(answers){
@@ -37,7 +37,7 @@ function promptQuestion(){
                 showLowInventory();
                 setTimeout(promptQuestion, 1000);
             } 
-            else if (answers.choices === "Add to inventory") {
+            else if (answers.choices === "Add inventory") {
                 setTimeout(addInventory, 1000);
             }  
             
@@ -92,9 +92,21 @@ function addInventory() {
     function managerQuestions() {
         inquirer.prompt([
             {
-                name: "manager",
+                name: "id",
                 type: "input",
-                message: "Please select the item id where you'd like to add inventory.",
+                message: "Please select the item where you want to add inventory.",
+                validate: function(value) {
+                    if (isNaN(value) == false) {
+                        return true;
+                    } else {
+                        console.log(" Invalid entry. Please try again.")
+                    }
+                }
+            },
+            {
+                name: "amount",
+                type: "input",
+                message: "How many would you like to add?",
                 validate: function(value) {
                     if (isNaN(value) == false) {
                         return true;
@@ -104,12 +116,46 @@ function addInventory() {
                 }
             }
         ])
-        .then(function(answer){
-            var managerChoice = answer.manager.toString();
-            var inst = `SELECT * FROM products WHERE item_id = '` +  managerChoice + `'`;
-            console.log(inst);
-           
+        .then(function(answers){
+            var id = answers.id.toString();
+            var amount = answers.amount.toString();
+            
+            
         })
+       
     }
 }
+
+// .then(function(answer){
+//     var managerChoice = answer.manager.toString();
+//     var inst = `SELECT * FROM products WHERE item_id = '` +  managerChoice + `'`;
+//     connection.query(inst, function(err, res){
+//         if (err) throw err;
+ 
+//         if (managerChoice > res[0].item_id) {
+//             console.log("Invalid id number. Please try again.");
+            
+//         } else {
+//             var newQuantity = res[0].stock_quantity + managerChoice;
+//             connection.query(
+//                 "UPDATE products SET ? WHERE ?",
+//                 [
+//                   {
+//                     stock_quantity: newQuantity
+//                   },
+//                   {
+//                     item_id: managerChoice
+//                   }
+//                 ],
+//                 function(err) {
+//                   if (err) throw err;
+//                   console.log("Your inventory has been updated. The new amount is: " + newQuantity);
+//                   showItems();
+                 
+//                 }
+//             );
+//         };
+//    })
+    
+// })
 
