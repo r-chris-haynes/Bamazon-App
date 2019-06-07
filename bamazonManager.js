@@ -40,7 +40,9 @@ function promptQuestion(){
             else if (answers.choices === "Add inventory") {
                 setTimeout(addInventory, 1000);
             }
-              
+            else if (answers.choices === "Add a new product") {
+                setTimeout(addNewProduct, 1000);
+            } 
             
         })
 };
@@ -144,9 +146,39 @@ function addInventory() {
                      setTimeout(promptQuestion, 1000);
                     }
                 );
-            }) 
-        })
+            });
+        });
        
-    }
+    };
+};
+
+// =======================================================================================
+
+function addNewProduct() {
+    inquirer.prompt([
+        {
+            name: "product",
+            type: "input",
+            message: "Please enter the product you'd like to add. "
+        },
+        {
+            name: "department",
+            type: "input",
+            message: "What department?"   
+        },
+        {
+            name: "price",
+            type: "input",
+            message: "Please enter the price. "    
+        },
+        {
+            name: "quantity",
+            type: "input",
+            message: "Please enter the quantity. "
+        }
+    ])
+    .then(function(answers){
+      console.log(answers)  
+    })
 }
 
