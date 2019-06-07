@@ -178,7 +178,14 @@ function addNewProduct() {
         }
     ])
     .then(function(answers){
-      console.log(answers)  
+      var query = "INSERT INTO products(product_name, department_name, price, stock_quantity) VALUES(?, ?, ?, ?)"; 
+
+      connection.query(query, [answers.product, answers.department, answers.price, answers.quantity], function (err, res) {
+          if(err) throw err;
+          console.log(res);
+          showItems();
+      })
+        
     })
 }
 
