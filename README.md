@@ -8,4 +8,10 @@ table of a mysql data base and then given this prompt.
 
 <img src="images/firstPrompt.png" width="400">
 
+After the user answers which item id they'd like to purchase, the next prompt asks 
+how many. Once an amount is chosen, the products database is updated to reflect the 
+sale and the customer is given the total price.
+
+<img src="images/secondPrompt.png" width="400">
+
 
