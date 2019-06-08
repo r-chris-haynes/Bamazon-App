@@ -182,8 +182,8 @@ function addNewProduct() {
 
       connection.query(query, [answers.product, answers.department, answers.price, answers.quantity], function (err, res) {
           if(err) throw err;
-          console.log(res);
           showItems();
+          setTimeout(promptQuestion, 1000);
       })
         
     })
