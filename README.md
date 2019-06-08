@@ -23,6 +23,34 @@ Additional functionality prevents orders from being placed if the customer input
 
 <img src="images/fourthPrompt.png" width="400">
 
+/===============================================================
+
+Running the  manager.js application will:  
+List a set of menu options:
+View Products for Sale
+View Low Inventory
+Add to Inventory
+Add New Product
+
+If the user selects the first prompt, they will see a table with all available iventory.
+
+<img src="images/managerSecondPrompt.png" width="400">
+
+If the user selects view low inventory, a table is displayed with all of the stores inventory
+with a stock quantity below 5.
+
+<img src="images/managerThirdPrompt.png" width="400">
+
+If the user selects add inventory, they will be presented a series of prompts.  Their answers 
+will be stored and updated in the database.  These new stock quantities will then be displayed 
+in a table.
+
+<img src="images/managerFourthPrompt.png" width="400">
+
+Last but not least, the user may add a new product.  Once again they are given a series of prompts.
+These answers are then used to update the database. 
+
+<img src="images/managerFifthPrompt.png" width="400">
 
 
 
